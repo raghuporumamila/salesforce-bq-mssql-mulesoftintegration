@@ -72,6 +72,14 @@ mvn clean mule:run -Dsf.user=... -Dsf.pass=... -Dmssql.host=localhost
 * **Alerts:** Configured in Runtime Manager for 500-series errors or connection failures to MS SQL.
 
 ---
+```markdown
+## 🆘 Emergency Rollback
+In the event of a critical failure:
+1. **Primary Method:** Go to GitLab `Operate > Environments > Production` and click **Rollback** on the last stable deployment.
+2. **Secondary Method:** Go to Anypoint Runtime Manager, select the app, and use the **History** tab to re-apply the previous configuration.
+3. **Database Check:** Verify that the `integration_audit` table in MS SQL hasn't been corrupted by the failed release.
+
+```
 In a professional production environment like **Runtime Fabric (RTF)**, a "rollback" is often just a "re-deployment" of a known stable version. Since GitLab keeps a history of every deployment, you don't necessarily need to write new code to fix a broken release.
 
 ### 1. The "Panic Button": GitLab UI Rollback
@@ -129,16 +137,6 @@ When rolling back this specific Salesforce/BigQuery/SQL integration, check these
 
 ---
 
-### Suggested README Section: Rollback Instructions
 
-Add this to the `README.md` we created earlier:
 
-```markdown
-## 🆘 Emergency Rollback
-In the event of a critical failure:
-1. **Primary Method:** Go to GitLab `Operate > Environments > Production` and click **Rollback** on the last stable deployment.
-2. **Secondary Method:** Go to Anypoint Runtime Manager, select the app, and use the **History** tab to re-apply the previous configuration.
-3. **Database Check:** Verify that the `integration_audit` table in MS SQL hasn't been corrupted by the failed release.
-
-```
 
